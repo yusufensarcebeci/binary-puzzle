@@ -11,4 +11,5 @@ Porject information;
 - warn the user if they made an error in the relevant row or column.
 - user will choose a puzzle size. // 6x6, 8x8, 10x10, 12x12 and 14x14.
 - user choose the difficulty level. // easy, medium, hard and very hard
+- Timer class
 
