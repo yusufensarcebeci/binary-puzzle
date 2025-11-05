@@ -1,11 +1,9 @@
-import { GameManager } from "./game/GameManager.js";
 
 export class App {
     constructor(width, height) {
         this.width = width;
         this.height = height;
         this.app = null;
-        this.gameManager = new GameManager();
     }
 
     async createApp() {
@@ -20,11 +18,9 @@ export class App {
 
     resizeCanvas(width, height) {
         this.app.renderer.resize(width , height);
-        this.app.stage.scale.set(1);
+        // this.app.stage.scale.set(1);
     }
 
-    initializeGame(){
-        this.gameManager.initializeGame();
-    }
+    
 }
 
