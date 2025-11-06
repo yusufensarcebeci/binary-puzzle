@@ -13,7 +13,8 @@ export class App {
             this.app = new PIXI.Application();
             await this.app.init({
                 width: this.width, height: this.height,
-                backgroundColor: 'FFC070', antialias: true,
+                backgroundColor: 'FFC070',
+                antialias: true,
                 resolution: window.devicePixelRatio || 1
             })
             this.createCanvas()

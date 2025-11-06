@@ -4,10 +4,10 @@ import { GameManager } from './src/core/GameManager.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    let GAME_WIDTH = window.innerWidth;
-    let GAME_HEIGHT = window.innerHeight;
+    let CANVAS_WIDTH = window.innerWidth;
+    let CANVAS_HEIGHT = window.innerHeight;
 
-    const app = new App(GAME_WIDTH, GAME_HEIGHT);
+    const app = new App(CANVAS_WIDTH, CANVAS_HEIGHT);
     const gameManager = new GameManager;
 
     app.createApp().then(()=>{
@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     window.addEventListener('resize', () => {
-        GAME_WIDTH = window.innerWidth;
-        GAME_HEIGHT = window.innerHeight;   
-        app.resizeCanvas(GAME_WIDTH, GAME_HEIGHT)
+        CANVAS_WIDTH = window.innerWidth;
+        CANVAS_HEIGHT = window.innerHeight;   
+        app.resizeCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     });
 
     console.log("%c[Main]", "color: cyan", "Game initialized and ready");
