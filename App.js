@@ -24,7 +24,7 @@ export  class App {
             AppContext.set("stage", this.app.stage);
             AppContext.set("ticker", this.app.ticker);
             console.log(AppContext);
-            console.log("%c[App]", "color: #7fff00", "PixiJS App  initialized successfully");
+            console.log("%c[App]", "color: #609e22ff", "PixiJS App  initialized successfully");
 
         } catch (e) {
             console.error("PixiJS App initialization failed:", error);
