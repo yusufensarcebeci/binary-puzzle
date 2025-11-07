@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let CANVAS_HEIGHT = window.innerHeight;
 
     const app = new App(CANVAS_WIDTH, CANVAS_HEIGHT);
-    const gameManager = new GameManager;
+    const gameManager = new GameManager(app);
 
     app.createApp().then(()=>{
         gameManager.initializeGame();

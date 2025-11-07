@@ -20,9 +20,7 @@ export class App {
             this.createCanvas()
             console.log("%c[App]", "color: #7fff00", "PixiJS initialized successfully");
 
-            // Scene container (ileride sahne yöneticisi için temel)
-            // this.scene = new PIXI.Container();
-            // this.app.stage.addChild(this.scene);
+          
         } catch (e) {
             console.error("PixiJS initialization failed:", error);
         }
@@ -41,7 +39,9 @@ export class App {
         }
 
         console.log(`[App] Canvas resized to: ${width}x${height}`);
-        // this.app.stage.scale.set(1);
-        // Bu sayede ileride app.onResize = (w,h)=> { sceneManager.resize(w,h) } gibi bağlantılar kurabilirsin.
     }
+
+    getTicker() {
+    return this.app.ticker;
+  }
 }
