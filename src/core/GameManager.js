@@ -1,13 +1,10 @@
-import GridManager from "../logic/GridManager.js"
+import { GridManager } from '../logic/GridManager.js';
 
-export class GameManager {
-    constructor(app) {
-        this.app = app
-    }
+export  class GameManager {
+    
     initializeGame() {
-        console.log(this.app);
-        this.gridManager = new GridManager(this.app)
-        this.gridManager.createGrid()
+        this.gridManager = new GridManager().createGrid()
+        
         console.log("%c[GameManager]", "color:red", "Game initialized");
 
     }

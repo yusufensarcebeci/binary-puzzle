@@ -1,20 +1,19 @@
+import { AppContext } from "../core/AppContext.js";
 
-export default class GridManager {
 
-  constructor(app){
-    this.app = app;
+export  class GridManager {
+  constructor() {
+    this.container = new PIXI.Container();
+    const stage = AppContext.get("stage");
+    stage.addChild(this.container)
   }
 
   createGrid() {
-    this.container = new PIXI.Container(); 
-    
-    this.app.app.stage.addChild(this.container);
-
     const graphics = new PIXI.Graphics();
     graphics.rect(50, 50, 100, 100);
     graphics.fill(0xde3249);
 
-    this.container.addChild(graphics)
+    this.container.addChild(graphics);
   }
-
 }
+

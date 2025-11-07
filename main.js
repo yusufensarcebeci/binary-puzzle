@@ -8,9 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     let CANVAS_HEIGHT = window.innerHeight;
 
     const app = new App(CANVAS_WIDTH, CANVAS_HEIGHT);
-    const gameManager = new GameManager(app);
-
-    app.createApp().then(()=>{
+     app.init().then(()=>{
+        const gameManager = new GameManager()
         gameManager.initializeGame();
     });
 
@@ -20,5 +19,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         app.resizeCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     });
 
-    console.log("%c[Main]", "color: cyan", "Game initialized and ready");
+    console.log("%c[Main]", "color: cyan", "Content initialized and ready");
 });

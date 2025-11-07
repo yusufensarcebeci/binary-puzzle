@@ -1,5 +1,6 @@
+import { AppContext } from "./src/core/AppContext.js";
 
-export class App {
+export  class App {
     constructor(width, height) {
         this.width = width;
         this.height = height;
@@ -7,7 +8,7 @@ export class App {
         this.onResize = null;
     }
 
-    async createApp() {
+    async init() {
 
         try {
             this.app = new PIXI.Application();
@@ -17,18 +18,18 @@ export class App {
                 antialias: true,
                 resolution: window.devicePixelRatio || 1
             })
-            this.createCanvas()
-            console.log("%c[App]", "color: #7fff00", "PixiJS initialized successfully");
+            document.body.appendChild(this.app.canvas);
 
-          
+            AppContext.set("app", this.app);
+            AppContext.set("stage", this.app.stage);
+            AppContext.set("ticker", this.app.ticker);
+            console.log(AppContext);
+            console.log("%c[App]", "color: #7fff00", "PixiJS App  initialized successfully");
+
         } catch (e) {
-            console.error("PixiJS initialization failed:", error);
+            console.error("PixiJS App initialization failed:", error);
         }
 
-    }
-
-    createCanvas() {
-        document.body.appendChild(this.app.canvas);
     }
 
     resizeCanvas(width, height) {
@@ -41,7 +42,5 @@ export class App {
         console.log(`[App] Canvas resized to: ${width}x${height}`);
     }
 
-    getTicker() {
-    return this.app.ticker;
-  }
 }
+
