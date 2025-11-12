@@ -1,10 +1,20 @@
 export class Cell {
     constructor(x, y, size) {
+        this.g = new PIXI.Graphics();
         this.x = x;
         this.y = y;
         this.size = size;
-        this.g = new PIXI.Graphics();
-        this.draw();
+
+        this.createCell()
+    }
+
+    createCell(){
+        try{
+            this.draw()
+            this.enableInteraction() 
+        }catch(e){
+            console.log(e);
+        }
     }
 
     draw() {
@@ -16,6 +26,21 @@ export class Cell {
     }
 
     setColor(color) {
-        this.graphics.fill(color);
+        this.g.fill(color);
+    }
+
+    enableInteraction() {
+        this.g.eventMode = "static"; 
+        this.g.cursor = "pointer";   
+
+        this.g.on("pointerdown", (c) => {
+            this.onClick();
+            console.log(c);
+        });
+    }
+    
+    onClick() {
+        console.log(`Cell clicked at (${this.x}, ${this.y})`);
+        this.setColor("#ff0000");
     }
 }
