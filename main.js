@@ -1,5 +1,6 @@
 import { App } from './App.js';
 import { GameManager } from './src/core/GameManager.js';
+import { ResponsivityManager } from './src/utils/ResponsivityManager.js';
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -8,15 +9,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     let CANVAS_HEIGHT = window.innerHeight;
 
     const app = new App(CANVAS_WIDTH, CANVAS_HEIGHT);
-     app.init().then(()=>{
+    app.init().then(() => {
         const gameManager = new GameManager()
         gameManager.initializeGame();
     });
 
+    
+
     window.addEventListener('resize', () => {
         CANVAS_WIDTH = window.innerWidth;
-        CANVAS_HEIGHT = window.innerHeight;   
+        CANVAS_HEIGHT = window.innerHeight;
         app.resizeCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
+        
     });
 
     console.log("%c[Main]", "color: cyan", "Content initialized and ready");

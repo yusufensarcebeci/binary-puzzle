@@ -1,11 +1,11 @@
 import { AppContext } from "./src/core/AppContext.js";
+import { ResponsivityManager } from "./src/utils/ResponsivityManager.js";
 
 export  class App {
     constructor(width, height) {
         this.width = width;
         this.height = height;
         this.app = null;
-        this.onResize = null;
     }
 
     async init() {
@@ -23,7 +23,6 @@ export  class App {
             AppContext.set("app", this.app);
             AppContext.set("stage", this.app.stage);
             AppContext.set("ticker", this.app.ticker);
-            console.log(AppContext);
             console.log("%c[App]", "color: #609e22ff", "PixiJS App  initialized successfully");
 
         } catch (e) {
@@ -35,10 +34,7 @@ export  class App {
     resizeCanvas(width, height) {
         if (!this.app) return;
         this.app.renderer.resize(width, height);
-        if (typeof this.onResize === "function") {
-            this.onResize(width, height);
-        }
-
+        ResponsivityManager.resize(width, height);
         console.log(`[App] Canvas resized to: ${width}x${height}`);
     }
 

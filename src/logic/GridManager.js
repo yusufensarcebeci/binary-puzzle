@@ -1,4 +1,5 @@
 import { AppContext } from "../core/AppContext.js";
+import { ResponsivityManager } from "../utils/ResponsivityManager.js";
 import { Cell } from "./Cell.js";
 
 export class GridManager {
@@ -6,12 +7,26 @@ export class GridManager {
     this.rows = rows;
     this.cols = cols;
     this.cellSize = cellSize;
+    
+    this.app = AppContext.get('app')
+    
     this.gridContainer = new PIXI.Container();
-
     const stage = AppContext.get("stage");
     stage.addChild(this.gridContainer);
-    // console.log(this.gridContainer);
-    //grid container ı center lamak istiyorum ekrana
+
+    ResponsivityManager.register(this)
+    console.log(this);
+  }
+
+  onResize(width, height) {
+    this.gridContainer.x = width / 2 - (this.cols * this.cellSize) / 2;
+    this.gridContainer.y = height / 2 - (this.rows * this.cellSize) / 2;
+
+    const scaleX = this.app.renderer.width;
+    const scaleY = this.app.renderer.height;
+    const scale = Math.min(Math.max(scaleX, scaleY), 1); // 0.5 altına düşmesin
+    this.gridContainer.scale.set(scale);
+
   }
 
   createGrid() {
@@ -21,15 +36,7 @@ export class GridManager {
         this.gridContainer.addChild(cell.g);
       }
     }
-    this.centerGrid();
-  }
-
-  centerGrid() {
-    const app = AppContext.get("app");
-    const totalWidth = this.cols * this.cellSize;
-    const totalHeight = this.rows * this.cellSize;
-
-    this.gridContainer.x = (app.renderer.width - totalWidth) / 2;
-    this.gridContainer.y = (app.renderer.height - totalHeight) / 2;
+    
+    this.onResize(this.app.renderer.width, this.app.renderer.height);
   }
 }
