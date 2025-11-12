@@ -22,11 +22,6 @@ export class GridManager {
     this.gridContainer.x = width / 2 - (this.cols * this.cellSize) / 2;
     this.gridContainer.y = height / 2 - (this.rows * this.cellSize) / 2;
 
-    const scaleX = this.app.renderer.width;
-    const scaleY = this.app.renderer.height;
-    const scale = Math.min(Math.max(scaleX, scaleY), 1); // 0.5 altına düşmesin
-    this.gridContainer.scale.set(scale);
-
   }
 
   createGrid() {
