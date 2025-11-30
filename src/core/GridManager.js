@@ -3,10 +3,15 @@ import { app } from "../main.js";
 export class GridManager {
 
   gridContainer = new PIXI.Container;
-  cellMargin = 10
+  cellMargin = 0
   cellSize = 50
   cols = 6
   rows = 6
+
+  defaultColor = '#ffffff'
+  pressedColor = '#535353'
+  hoverColor = '#adadadff'
+
 
   onResize(width, height) {
     this.gridContainer.x =
@@ -33,12 +38,51 @@ export class GridManager {
           this.cellSize, this.cellSize);
         cell.fill("#ffffffff");
         cell.stroke({ width: 1.5, color: "#000000ff" });
+        cell.eventMode = 'static';
+        cell
+          .on('pointerdown', this.onPointerDown.bind(this))
+          .on('pointerup', this.onPointerUp.bind(this))
+          .on('pointerupoutside', this.onPointerUp.bind(this))
+          .on('pointerover', this.onPointerOver.bind(this))
+          .on('pointerout', this.onPointerOut.bind(this));
 
         this.gridContainer.addChild(cell);
       }
     }
   }
 
+  setCellColor(cell, color) {
+    cell.fill(color);
+    cell.stroke({ width: 1.5, color: "#000000ff" });
+  }
+  onPointerDown(e) {
+    const cell = e.currentTarget
+    cell.isPressed = true 
+    this.setCellColor(e.currentTarget, this.pressedColor)
+  }
+  onPointerUp(e) {
+    const cell = e.currentTarget
+    cell.isPressed = false 
+    if (cell.isHovered) {
+      this.setCellColor(e.currentTarget, this.hoverColor)
+    } else {
+      this.setCellColor(e.currentTarget, this.defaultColor)
+    }
+  }
+  onPointerOver(e) {
+    const cell = e.currentTarget
+    cell.isHovered = true
+
+    if (cell.isPressed) return
+    this.setCellColor(e.currentTarget, this.hoverColor)
+
+  }
+  onPointerOut(e) {
+    const cell = e.currentTarget
+    cell.isHovered = false
+    this.setCellColor(e.currentTarget, this.defaultColor)
+
+  }
 
 }
 
