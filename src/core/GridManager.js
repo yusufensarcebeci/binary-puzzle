@@ -1,4 +1,5 @@
 import { app } from "../main.js";
+import { CellType } from "./CellType.js";
 
 export class GridManager {
 
@@ -11,7 +12,6 @@ export class GridManager {
   defaultColor = '#ffffff'
   pressedColor = '#535353'
   hoverColor = '#adadadff'
-
 
   onResize(width, height) {
     this.gridContainer.x =
@@ -30,7 +30,8 @@ export class GridManager {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
 
-        const cell = new PIXI.Graphics
+        const cell = new PIXI.Graphics;
+        cell.type = CellType.DEFAULT
         cell.clear();
         cell.rect(
           startX + x * (this.cellSize + this.cellMargin),
@@ -38,7 +39,9 @@ export class GridManager {
           this.cellSize, this.cellSize);
         cell.fill("#ffffffff");
         cell.stroke({ width: 1.5, color: "#000000ff" });
+
         cell.eventMode = 'static';
+        cell.cursor='pointer' 
         cell
           .on('pointerdown', this.onPointerDown.bind(this))
           .on('pointerup', this.onPointerUp.bind(this))
@@ -55,13 +58,17 @@ export class GridManager {
     cell.fill(color);
     cell.stroke({ width: 1.5, color: "#000000ff" });
   }
+
   onPointerDown(e) {
     const cell = e.currentTarget
+    if(cell.type==CellType.NON_INTERACTIVE) return
     cell.isPressed = true 
     this.setCellColor(e.currentTarget, this.pressedColor)
   }
   onPointerUp(e) {
     const cell = e.currentTarget
+    if(cell.type==CellType.NON_INTERACTIVE) return
+    
     cell.isPressed = false 
     if (cell.isHovered) {
       this.setCellColor(e.currentTarget, this.hoverColor)
@@ -71,6 +78,8 @@ export class GridManager {
   }
   onPointerOver(e) {
     const cell = e.currentTarget
+    if(cell.type==CellType.NON_INTERACTIVE) return
+
     cell.isHovered = true
 
     if (cell.isPressed) return
@@ -79,6 +88,8 @@ export class GridManager {
   }
   onPointerOut(e) {
     const cell = e.currentTarget
+    if(cell.type==CellType.NON_INTERACTIVE) return
+
     cell.isHovered = false
     this.setCellColor(e.currentTarget, this.defaultColor)
 

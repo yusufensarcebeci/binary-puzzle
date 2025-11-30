@@ -1,0 +1,8 @@
+const INTERACTIVE = 'INTERACTIVE';
+const NON_INTERACTIVE = 'NON_INTERACTIVE';
+
+export const CellType = Object.freeze({
+  INTERACTIVE,
+  NON_INTERACTIVE,
+  DEFAULT: NON_INTERACTIVE
+});
