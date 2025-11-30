@@ -1,7 +1,6 @@
-import GameManager from "./core/GameManager";
+import GameManager from "./core/GameManager.js";
 
 export const app = new PIXI.Application();
-
 async function initializeApp() {
 
     try {
@@ -29,9 +28,9 @@ function resizeCanvas(width, height) {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    initializeApp().then(()=>{
-        // GameManager.initializeGame();
-    });
+    initializeApp()
+    const gameManager = new GameManager();
+    gameManager.initializeGame();
 
     window.addEventListener('resize', () => {
         resizeCanvas(window.innerWidth, window.innerHeight)
